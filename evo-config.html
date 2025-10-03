@@ -9,8 +9,8 @@
         body {
             font-family: Tahoma, sans-serif;
             text-align: left;
-            margin-left: 10px;
-            background-color: rgb(0, 0, 0);
+            margin-left: 10px;        
+            background-color: rgb(220, 220, 220);
         }
 
         .container {
@@ -32,8 +32,16 @@
             font-size: 26px;
             padding: 8px;
             margin: 8px;
-            border: px solid white;
-            background-color: #a9a9a9;
+            border: 1px solid #ffc200;
+            background-color: #ffffff;
+            box-shadow: #ffc200 0px 2px 0px;
+            border-radius: 8px;
+        }
+
+        input::placeholder {
+            color: rgb(133, 133, 133);
+            font-weight: normal;
+            font-size: 20px;
         }
 
         .input-grid {
@@ -71,14 +79,34 @@
 
         h1 {
             font-family: Tahoma, sans-serif;
-            color: #ffc200;
+            color: #000000;
+            font-size: 48px;
+            text-align: center;
+            margin-top: 0;
+            text-shadow: #ffc200 0px 2px 0px;
         }
 
-        button {
+        .button {
             font-family: Tahoma, sans-serif;
+            font-weight: bold;
             font-size: 20px;
-            padding: 15px 30px;
+            text-align: center;
             cursor: pointer;
+            width: 150px;
+            height: 50px;
+            border-radius: 8px;
+            border: 1px solid #ffc200;
+            background-color: #ffffff;
+            box-shadow: #ffc200 0px 2px 0px;
+            margin: 10px;
+        }
+
+        .button:hover {background-color: #c49600}
+
+        .button:active {
+            background-color: #ffc200;
+            box-shadow: 0 5px #c49600;
+            transform: translateY(4px);
         }
 
         @font-face {
@@ -90,13 +118,16 @@
             font-family: 'Libre Barcode 39 Text Regular', sans-serif;
             font-size: 30px;
         }
-            
+
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>SNS Assembly EVO Hardware Config Sheet</h1>
+        <div style="text-align: center;">
+            <img src="https://www.studionetworksolutions.com/wp-content/uploads/2023/09/EVO-Cloud.png" alt="SNS Logo" style="height: 100px; margin-top: 25px; margin-bottom: 0px; margin-left: 10px;">
+            <h1>SNS Assembly EVO Hardware Config Sheet</h1>
+        </div>
         <form id="myForm">
             <table>
                 <tbody>
@@ -118,48 +149,7 @@
                         </td>   
                     </tr>
                 </tbody>
-            </table>
-            <div class="index" style="color: white;">
-                <p>The current index is: <span id="currentIndex"></span></p>
-                <script>
-                    // Update the current index display whenever it changes
-                    function updateCurrentIndexDisplay() {
-                        document.getElementById('currentIndex').textContent = currentIndex;
-                    }
-
-                    // Initial display
-                    updateCurrentIndexDisplay();
-
-                    // Hook into keydown to update display
-                    document.addEventListener('keydown', function () {
-                        updateCurrentIndexDisplay();
-                    });
-                    document.addEventListener('click', function () {
-                        updateCurrentIndexDisplay();
-                    });
-                </script>
-                <p>The next index is: <span id="nextIdx"></span></p>
-                <script>
-                    // Update the next index display whenever it changes
-                    document.getElementById('currentIndex').textContent = currentIndex;
-                    function updateNextIndexDisplay() {
-                        let nextIdx = currentIndex + 1;
-
-                        document.getElementById('nextIdx').textContent = nextIdx;
-                    }
-
-                    // Initial display
-                    updateNextIndexDisplay();
-
-                    // Hook into keydown to update display
-                    document.addEventListener('keydown', function () {
-                        updateNextIndexDisplay();
-                    });
-                    document.addEventListener('click', function () {
-                        updateNextIndexDisplay();
-                    });
-                </script>
-            </div>
+            </table>      
 
             <!-- Grid of input boxes -->
                       <div class="input-grid" id="input-grid">
@@ -224,11 +214,11 @@
                 </div>
             </div>
 			<br>
-            <button type="button" id="submit-button" onclick="generateTable()">Print</button>
+            <button class="button" id="submit-button" onclick="generateTable()">Print</button>
 			<br>
 			<p></p>
 			<br>
-			<button type="button" id="clear-button" onclick="location.reload();">Clear</button>
+			<button class="button" id="clear-button" onclick="location.reload();">Clear</button>
 
         </form>
     </div>
@@ -274,7 +264,7 @@
         // Table for the top input boxes
         printWindow.document.write('<table class="print-table">');
 		printWindow.document.write('<table>');
-        printWindow.document.write('<thead><tr><th style="padding-right: 100px;">Sales Order #</th><br><th style="padding-right: 100px;">EVO Serial #</th><th>MBX # (Other - Scan Chassis)</th></tr></thead><tbody>');
+        printWindow.document.write('<thead><tr><th>Sales Order #</th><br><th>EVO Serial #</th><th>MBX # (Other - Scan Chassis)</th></tr></thead><tbody>');
         printWindow.document.write(`<tr><td class="barcode">*${inputValues.input1}*</td><td class="barcode">*${inputValues.input2}*</td><td class="barcode">*${inputValues.input3}*</td></tr>`);
         printWindow.document.write('</tbody></table>');
         printWindow.document.write('<div class="spacer"></div>');
@@ -343,9 +333,6 @@ printWindow.document.write('</tbody></table>');
                     currentIndex = idx;
                     // keep focus on the clicked input
                     clickedInput.focus();
-                    // update displays immediately after changing index
-                    if (typeof updateCurrentIndexDisplay === 'function') updateCurrentIndexDisplay();
-                    if (typeof updateNextIndexDisplay === 'function') updateNextIndexDisplay();
                     const nextIdx = (currentIndex + 1) % inputIds.length;
                     console.log('clicked on input:', clickedInput.id, 'Current index:', currentIndex, 'Next index:', nextIdx);
                 }
@@ -359,8 +346,6 @@ printWindow.document.write('</tbody></table>');
         const clamped = (idx + inputIds.length) % inputIds.length;
         currentIndex = clamped;
         document.getElementById(inputIds[clamped]).focus();
-        if (typeof updateCurrentIndexDisplay === 'function') updateCurrentIndexDisplay();
-        if (typeof updateNextIndexDisplay === 'function') updateNextIndexDisplay();
     }
 
     document.addEventListener('keydown', function (event) {
@@ -391,15 +376,16 @@ printWindow.document.write('</tbody></table>');
         // 1 (Serial)      -> 4 (model-1)
         // 2 (MBX)         -> 5 (serial-1)
         if (currentIndex === 0) {
-            nextIdx = 3;
+            nextIdx = 1;
         } else if (currentIndex === 1) {
-            nextIdx = 3;
+            nextIdx = 2;
         } else if (currentIndex === 2) {
             nextIdx = 3;
         } else {
             // In the 4-column grid, Enter = move down one row (same column)
             nextIdx = currentIndex + 4;
         }
+        
 
         focusAt(nextIdx);
         nextIdx = currentIndex + 1;
@@ -407,6 +393,21 @@ printWindow.document.write('</tbody></table>');
         return;
         }
 
+        if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        focusAt(currentIndex + 1);
+        let nextIdx = currentIndex + 1;
+        console.log('Current index:', currentIndex, 'Next index:', nextIdx);
+        return;
+        }
+
+        if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        focusAt(currentIndex - 1);
+        let nextIdx = currentIndex + 1; // still +1 to show next in log   
+        console.log('Current index:', currentIndex, 'Next index:', nextIdx);
+        return;
+        }
         // For all other keys, do nothing with focus/index
     });
         function moveToNext(event, nextInputId) {

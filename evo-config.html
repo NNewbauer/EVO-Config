@@ -392,23 +392,6 @@ printWindow.document.write('</tbody></table>');
         console.log('Current index:', currentIndex, 'Next index:', nextIdx);
         return;
         }
-
-        if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        focusAt(currentIndex + 1);
-        let nextIdx = currentIndex + 1;
-        console.log('Current index:', currentIndex, 'Next index:', nextIdx);
-        return;
-        }
-
-        if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        focusAt(currentIndex - 1);
-        let nextIdx = currentIndex + 1; // still +1 to show next in log   
-        console.log('Current index:', currentIndex, 'Next index:', nextIdx);
-        return;
-        }
-        // For all other keys, do nothing with focus/index
     });
         function moveToNext(event, nextInputId) {
             if (event.key === "Enter") {

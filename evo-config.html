@@ -225,6 +225,8 @@
 
     <script>
     function generateTable() {
+        
+        event.preventDefault()
         // Get values from the three input boxes at the top
         const inputValues = {
             input1: document.getElementById('input1').value || ' ',
@@ -269,35 +271,34 @@
         printWindow.document.write('</tbody></table>');
         printWindow.document.write('<div class="spacer"></div>');
 
-// Table for the grid
-printWindow.document.write('<table class="print-table">');
-printWindow.document.write('<thead><tr><th>Mfg. Name</th><th>Model</th><th>Serial</th><th>Firmware</th></tr></thead><tbody>');
+        // Table for the grid
+        printWindow.document.write('<table class="print-table">');
+        printWindow.document.write('<thead><tr><th>Mfg. Name</th><th>Model</th><th>Serial</th><th>Firmware</th></tr></thead><tbody>');
 
-gridValues.forEach(rowData => {
-    printWindow.document.write('<tr>');
-    rowData.forEach((cellData, index) => {
-        if (index === 0) {
-            printWindow.document.write(`<td>${cellData}</td>`); // No barcode font for the first column
-        } else {
-            const barcodeCellData = cellData.trim() !== '' ? `*${cellData}*` : '';
-printWindow.document.write(`<td class="barcode">${barcodeCellData}</td>`);
+        gridValues.forEach(rowData => {
+                printWindow.document.write('<tr>');
+                rowData.forEach((cellData, index) => {
+                if (index === 0) {
+                    printWindow.document.write(`<td>${cellData}</td>`); // No barcode font for the first column
+                } else {
+                    const barcodeCellData = cellData.trim() !== '' ? `*${cellData}*` : '';
+                    printWindow.document.write(`<td class="barcode">${barcodeCellData}</td>`);
+                    }
+                });
+                printWindow.document.write('</tr>');
+            });
 
+            printWindow.document.write('</tbody></table>');
+
+            // Close the window after printing
+            printWindow.document.write('</div></body></html>');
+            printWindow.document.close();
+            setTimeout(() => {
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }, 25); // Wait for the new window to load the font before printing
         }
-    });
-    printWindow.document.write('</tr>');
-});
-
-printWindow.document.write('</tbody></table>');
-
-        // Close the window after printing
-        printWindow.document.write('</div></body></html>');
-  printWindow.document.close();
-  setTimeout(() => {
-    printWindow.focus();
-    printWindow.print();
-    printWindow.close();
-  }, 25); // Wait for the new window to load the font before printing
-}
     </script>
 
     <script>

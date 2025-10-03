@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNS Assembly EVO Hardware Config Sheet</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            text-align: left;
+            margin-left: 10px;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        label {
+            display: inline-block;
+            font-weight: bold;
+            margin-right: 10px;
+            vertical-align: top;
+            width: 70px;
+        }
+
+        input {
+            font-family: Arial;
+            font-weight: bold;
+            font-size: 26px;
+            padding: 8px;
+            margin: 8px;
+            border: px solid white;
+            background-color: #a9a9a9;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .grid-header {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+            transform: scale(5.0); /* Adjust the scale factor as needed */
+            transform-origin: top left;
+        }
+
+        .print-table th,
+        .print-table td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: center;
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+            }
+        }
+
+        h1 {
+            font-family: Tahoma, sans-serif;
+            color: #ffc200;
+        }
+
+        button {
+            font-family: Tahoma, sans-serif;
+            font-size: 20px;
+            padding: 15px 30px;
+            cursor: pointer;
+        }
+
+        @font-face {
+            font-family: 'Libre Barcode 39 Text Regular';
+            src: url('LibreBarcode39Text-Regular.woff2') format('woff2');
+        }
+
+        .barcode {
+            font-family: 'Libre Barcode 39 Text Regular', sans-serif;
+            font-size: 30px;
+        }
+            
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>SNS Assembly EVO Hardware Config Sheet</h1>
+        <form id="myForm">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" id="input1" name="input1" placeholder="Sales Order #">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" id="input2" name="input2" placeholder="Serial #">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" id="input3" name="input3" placeholder="MBX # (If other - scan Chassis #)">
+                            </div>
+                        </td>   
+                    </tr>
+                </tbody>
+            </table>
+            <div class="index" style="color: white;">
+                <p>The current index is: <span id="currentIndex"></span></p>
+                <script>
+                    // Update the current index display whenever it changes
+                    function updateCurrentIndexDisplay() {
+                        document.getElementById('currentIndex').textContent = currentIndex;
+                    }
+
+                    // Initial display
+                    updateCurrentIndexDisplay();
+
+                    // Hook into keydown to update display
+                    document.addEventListener('keydown', function () {
+                        updateCurrentIndexDisplay();
+                    });
+                    document.addEventListener('click', function () {
+                        updateCurrentIndexDisplay();
+                    });
+                </script>
+                <p>The next index is: <span id="nextIdx"></span></p>
+                <script>
+                    // Update the next index display whenever it changes
+                    document.getElementById('currentIndex').textContent = currentIndex;
+                    function updateNextIndexDisplay() {
+                        let nextIdx = currentIndex + 1;
+
+                        document.getElementById('nextIdx').textContent = nextIdx;
+                    }
+
+                    // Initial display
+                    updateNextIndexDisplay();
+
+                    // Hook into keydown to update display
+                    document.addEventListener('keydown', function () {
+                        updateNextIndexDisplay();
+                    });
+                    document.addEventListener('click', function () {
+                        updateNextIndexDisplay();
+                    });
+                </script>
+            </div>
+
+            <!-- Grid of input boxes -->
+                      <div class="input-grid" id="input-grid">
+                <!-- Mfg. Name Column -->
+                <div>
+                    <div class="grid-header">Mfg. Name</div>
+                    <input type="text" id="mfg-name-1" name="mfg-name-1" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-2" name="mfg-name-2" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-3" name="mfg-name-3" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-4" name="mfg-name-4" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-5" name="mfg-name-5" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-6" name="mfg-name-6" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-7" name="mfg-name-7" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-8" name="mfg-name-8" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-9" name="mfg-name-9" placeholder="Mfg. Name" style="font-weight: bold;">
+                    <input type="text" id="mfg-name-10" name="mfg-name-10" placeholder="Mfg. Name" style="font-weight: bold;">
+                </div>
+
+                <!-- Model Column -->
+                   <div>
+                    <div class="grid-header">Model</div>
+                    <input type="text" id="model-1" name="model-1" placeholder="Model">
+                    <input type="text" id="model-2" name="model-2" placeholder="Model">
+                    <input type="text" id="model-3" name="model-3" placeholder="Model">
+                    <input type="text" id="model-4" name="model-4" placeholder="Model">
+                    <input type="text" id="model-5" name="model-5" placeholder="Model">
+                    <input type="text" id="model-6" name="model-6" placeholder="Model">
+                    <input type="text" id="model-7" name="model-7" placeholder="Model">
+                    <input type="text" id="model-8" name="model-8" placeholder="Model">
+                    <input type="text" id="model-9" name="model-9" placeholder="Model">
+                    <input type="text" id="model-10" name="model-10" placeholder="Model">
+                </div>
+
+                <!-- Serial Column -->
+                  <div>
+                    <div class="grid-header">Serial</div>
+                    <input type="text" id="serial-1" name="serial-1" placeholder="Serial">
+                    <input type="text" id="serial-2" name="serial-2" placeholder="Serial">
+                    <input type="text" id="serial-3" name="serial-3" placeholder="Serial">
+                    <input type="text" id="serial-4" name="serial-4" placeholder="Serial">
+                    <input type="text" id="serial-5" name="serial-5" placeholder="Serial">
+                    <input type="text" id="serial-6" name="serial-6" placeholder="Serial">
+                    <input type="text" id="serial-7" name="serial-7" placeholder="Serial">
+                    <input type="text" id="serial-8" name="serial-8" placeholder="Serial">
+                    <input type="text" id="serial-9" name="serial-9" placeholder="Serial">
+                    <input type="text" id="serial-10" name="serial-10" placeholder="Serial">
+                </div>
+
+                <!-- Firmware Column -->
+                       <div>
+                    <div class="grid-header">Firmware</div>
+                    <input type="text" id="firmware-1" name="firmware-1" placeholder="Firmware">
+                    <input type="text" id="firmware-2" name="firmware-2" placeholder="Firmware">
+                    <input type="text" id="firmware-3" name="firmware-3" placeholder="Firmware">
+                    <input type="text" id="firmware-4" name="firmware-4" placeholder="Firmware">
+                    <input type="text" id="firmware-5" name="firmware-5" placeholder="Firmware">
+                    <input type="text" id="firmware-6" name="firmware-6" placeholder="Firmware">
+                    <input type="text" id="firmware-7" name="firmware-7" placeholder="Firmware">
+                    <input type="text" id="firmware-8" name="firmware-8" placeholder="Firmware">
+                    <input type="text" id="firmware-9" name="firmware-9" placeholder="Firmware">
+                    <input type="text" id="firmware-10" name="firmware-10" placeholder="hit clear when your done">
+                </div>
+            </div>
+			<br>
+            <button type="button" id="submit-button" onclick="generateTable()">Print</button>
+			<br>
+			<p></p>
+			<br>
+			<button type="button" id="clear-button" onclick="location.reload();">Clear</button>
+
+        </form>
+    </div>
+
+    <script>
+    function generateTable() {
+        // Get values from the three input boxes at the top
+        const inputValues = {
+            input1: document.getElementById('input1').value || ' ',
+            input2: document.getElementById('input2').value || ' ',
+            input3: document.getElementById('input3').value || ' ',
+        };
+
+        // Get input values for the grid
+        const gridValues = [];
+        for (let i = 1; i <= 10; i++) {
+            const rowData = [];
+            ['mfg-name', 'model', 'serial', 'firmware'].forEach(column => {
+                const inputId = `${column}-${i}`;
+                const input = document.getElementById(inputId);
+                rowData.push(input ? input.value || ' ' : ' ');
+            });
+            gridValues.push(rowData);
+        }
+
+        // Open a new window and print the table
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Print</title>');
+        printWindow.document.write('<style>');
+        printWindow.document.write('@font-face {');
+        printWindow.document.write('font-family: "Libre Barcode 39 Text Regular";');
+        printWindow.document.write('src: url("LibreBarcode39Text-Regular.woff2") format("woff2");');
+        printWindow.document.write('}');
+        printWindow.document.write('body{font-family: Tahoma; font-size: 12px;}'); // Use a generic sans-serif font for the body
+        printWindow.document.write('.container{max-width: 800px;margin: 0 auto;}');
+        printWindow.document.write('.print-table{width: 100%;border-collapse: collapse;margin-top: 20px;}');
+        printWindow.document.write('.print-table th, .print-table td{border: 1px solid #ddd;padding: 15px;text-align: left;}');
+        printWindow.document.write('.spacer{height: 20px;}');
+        printWindow.document.write('.barcode{font-family: "Libre Barcode 39 Text Regular", sans-serif; font-size: 30px;}');
+        printWindow.document.write('</style>');
+        printWindow.document.write('<div style="margin-left: 0.1in; margin-right: 0.1in;" class="container">');
+
+        // Table for the top input boxes
+        printWindow.document.write('<table class="print-table">');
+		printWindow.document.write('<table>');
+        printWindow.document.write('<thead><tr><th style="padding-right: 100px;">Sales Order #</th><br><th style="padding-right: 100px;">EVO Serial #</th><th>MBX # (Other - Scan Chassis)</th></tr></thead><tbody>');
+        printWindow.document.write(`<tr><td class="barcode">*${inputValues.input1}*</td><td class="barcode">*${inputValues.input2}*</td><td class="barcode">*${inputValues.input3}*</td></tr>`);
+        printWindow.document.write('</tbody></table>');
+        printWindow.document.write('<div class="spacer"></div>');
+
+// Table for the grid
+printWindow.document.write('<table class="print-table">');
+printWindow.document.write('<thead><tr><th>Mfg. Name</th><th>Model</th><th>Serial</th><th>Firmware</th></tr></thead><tbody>');
+
+gridValues.forEach(rowData => {
+    printWindow.document.write('<tr>');
+    rowData.forEach((cellData, index) => {
+        if (index === 0) {
+            printWindow.document.write(`<td>${cellData}</td>`); // No barcode font for the first column
+        } else {
+            const barcodeCellData = cellData.trim() !== '' ? `*${cellData}*` : '';
+printWindow.document.write(`<td class="barcode">${barcodeCellData}</td>`);
+
+        }
+    });
+    printWindow.document.write('</tr>');
+});
+
+printWindow.document.write('</tbody></table>');
+
+        // Close the window after printing
+        printWindow.document.write('</div></body></html>');
+  printWindow.document.close();
+  setTimeout(() => {
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+  }, 25); // Wait for the new window to load the font before printing
+}
+    </script>
+
+    <script>
+
+        const gridInputs = document.querySelectorAll('.input-grid input');
+        let currentIndex = 0;
+
+        // Manually specify the input IDs to navigate (hoisted so other handlers can use it)
+        const inputIds = [
+            "input1", "input2", "input3",
+            "mfg-name-1", "model-1", "serial-1", "firmware-1",
+            "mfg-name-2", "model-2", "serial-2", "firmware-2",
+            "mfg-name-3", "model-3", "serial-3", "firmware-3",
+            "mfg-name-4", "model-4", "serial-4", "firmware-4",
+            "mfg-name-5", "model-5", "serial-5", "firmware-5",
+            "mfg-name-6", "model-6", "serial-6", "firmware-6",
+            "mfg-name-7", "model-7", "serial-7", "firmware-7",
+            "mfg-name-8", "model-8", "serial-8", "firmware-8",
+            "mfg-name-9", "model-9", "serial-9", "firmware-9",
+            "mfg-name-10", "model-10", "serial-10", "firmware-10"
+            // ... repeat for the remaining input IDs
+        ];
+
+        // Start the focus on the first input box
+        document.getElementById('input1').focus();
+
+        // When a user clicks anywhere, if they clicked an input we track its index
+        document.addEventListener('click', function (e) {
+            const clickedInput = e.target.closest('input');
+            if (clickedInput) {
+                const idx = inputIds.indexOf(clickedInput.id);
+                if (idx !== -1) {
+                    currentIndex = idx;
+                    // keep focus on the clicked input
+                    clickedInput.focus();
+                    // update displays immediately after changing index
+                    if (typeof updateCurrentIndexDisplay === 'function') updateCurrentIndexDisplay();
+                    if (typeof updateNextIndexDisplay === 'function') updateNextIndexDisplay();
+                    const nextIdx = (currentIndex + 1) % inputIds.length;
+                    console.log('clicked on input:', clickedInput.id, 'Current index:', currentIndex, 'Next index:', nextIdx);
+                }
+                currentIndex = idx;
+                let nextIdx = currentIndex + 1;
+                console.log('clicked at', event.key, 'Current index:', currentIndex, 'Next index:', nextIdx);
+            }
+       });
+
+        function focusAt(idx) {
+        const clamped = (idx + inputIds.length) % inputIds.length;
+        currentIndex = clamped;
+        document.getElementById(inputIds[clamped]).focus();
+        if (typeof updateCurrentIndexDisplay === 'function') updateCurrentIndexDisplay();
+        if (typeof updateNextIndexDisplay === 'function') updateNextIndexDisplay();
+    }
+
+    document.addEventListener('keydown', function (event) {
+        // Only handle when the active element is one of our inputs
+        const active = document.activeElement;
+        if (!active || active.tagName !== 'INPUT') return;
+
+        // Keep currentIndex in sync with the active element
+        const idx = inputIds.indexOf(active.id);
+        if (idx !== -1) currentIndex = idx;
+
+        // Custom navigation
+        if (event.key === 'Tab') {
+        event.preventDefault();
+        // simple linear advance for Tab
+        focusAt(currentIndex + 1);
+        let nextIdx = currentIndex + 1;
+        console.log('Current index:', currentIndex, 'Next index:', nextIdx);
+        return;
+        }
+
+        if (event.key === 'Enter') {
+        event.preventDefault();
+        let nextIdx;
+
+        // Top row special mapping:
+        // 0 (Sales Order) -> 3 (mfg-name-1)
+        // 1 (Serial)      -> 4 (model-1)
+        // 2 (MBX)         -> 5 (serial-1)
+        if (currentIndex === 0) {
+            nextIdx = 3;
+        } else if (currentIndex === 1) {
+            nextIdx = 3;
+        } else if (currentIndex === 2) {
+            nextIdx = 3;
+        } else {
+            // In the 4-column grid, Enter = move down one row (same column)
+            nextIdx = currentIndex + 4;
+        }
+
+        focusAt(nextIdx);
+        nextIdx = currentIndex + 1;
+        console.log('Current index:', currentIndex, 'Next index:', nextIdx);
+        return;
+        }
+
+        // For all other keys, do nothing with focus/index
+    });
+        function moveToNext(event, nextInputId) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById(nextInputId).focus();
+            }
+        }
+
+        function moveToNextGrid(event, nextInputId, topInputId) {           // Swapped tab and enter
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById(nextInputId).focus();
+            }
+            if (event.key === "Tab") {
+                event.preventDefault();
+                document.getElementById(topInputId).focus();
+            }
+        }
+    </script>
+	<script>
+	function clearInputs() {
+    // Clear values from the three input boxes at the top
+    document.getElementById('input1').value = '';
+    document.getElementById('input2').value = '';
+    document.getElementById('input3').value = '';
+
+    // Clear values from the grid input boxes
+    const gridInputs = document.querySelectorAll('.input-grid input');
+    gridInputs.forEach(input => {
+        input.value = '';
+    });
+
+    // Set focus to the first input box after clearing
+    document.getElementById('input1').focus();
+}
+</script>
+</body>
+
+</html>

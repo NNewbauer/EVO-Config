@@ -200,17 +200,17 @@
 
                 <!-- Firmware Column -->
                        <div>
-                    <div class="grid-header">Firmware</div>
-                    <input type="text" id="firmware-1" name="firmware-1" placeholder="Firmware">
-                    <input type="text" id="firmware-2" name="firmware-2" placeholder="Firmware">
-                    <input type="text" id="firmware-3" name="firmware-3" placeholder="Firmware">
-                    <input type="text" id="firmware-4" name="firmware-4" placeholder="Firmware">
-                    <input type="text" id="firmware-5" name="firmware-5" placeholder="Firmware">
-                    <input type="text" id="firmware-6" name="firmware-6" placeholder="Firmware">
-                    <input type="text" id="firmware-7" name="firmware-7" placeholder="Firmware">
-                    <input type="text" id="firmware-8" name="firmware-8" placeholder="Firmware">
-                    <input type="text" id="firmware-9" name="firmware-9" placeholder="Firmware">
-                    <input type="text" id="firmware-10" name="firmware-10" placeholder="hit clear when your done">
+                    <div class="grid-header">Component</div>
+                    <input type="text" id="component-1" name="component-1" placeholder="Component">
+                    <input type="text" id="component-2" name="component-2" placeholder="Component">
+                    <input type="text" id="component-3" name="component-3" placeholder="Component">
+                    <input type="text" id="component-4" name="component-4" placeholder="Component">
+                    <input type="text" id="component-5" name="component-5" placeholder="Component">
+                    <input type="text" id="component-6" name="component-6" placeholder="Component">
+                    <input type="text" id="component-7" name="component-7" placeholder="Component">
+                    <input type="text" id="component-8" name="component-8" placeholder="Component">
+                    <input type="text" id="component-9" name="component-9" placeholder="Component">
+                    <input type="text" id="component-10" name="component-10" placeholder="hit clear when your done">
                 </div>
             </div>
 			<br>
@@ -238,7 +238,7 @@
         const gridValues = [];
         for (let i = 1; i <= 10; i++) {
             const rowData = [];
-            ['mfg-name', 'model', 'serial', 'firmware'].forEach(column => {
+            ['mfg-name', 'model', 'serial', 'component'].forEach(column => {
                 const inputId = `${column}-${i}`;
                 const input = document.getElementById(inputId);
                 rowData.push(input ? input.value || ' ' : ' ');
@@ -273,7 +273,7 @@
 
         // Table for the grid
         printWindow.document.write('<table class="print-table">');
-        printWindow.document.write('<thead><tr><th>Mfg. Name</th><th>Model</th><th>Serial</th><th>Firmware</th></tr></thead><tbody>');
+        printWindow.document.write('<thead><tr><th>Mfg. Name</th><th>Model</th><th>Serial</th><th>Component</th></tr></thead><tbody>');
 
         gridValues.forEach(rowData => {
                 printWindow.document.write('<tr>');
@@ -309,16 +309,16 @@
         // Manually specify the input IDs to navigate (hoisted so other handlers can use it)
         const inputIds = [
             "input1", "input2", "input3",
-            "mfg-name-1", "model-1", "serial-1", "firmware-1",
-            "mfg-name-2", "model-2", "serial-2", "firmware-2",
-            "mfg-name-3", "model-3", "serial-3", "firmware-3",
-            "mfg-name-4", "model-4", "serial-4", "firmware-4",
-            "mfg-name-5", "model-5", "serial-5", "firmware-5",
-            "mfg-name-6", "model-6", "serial-6", "firmware-6",
-            "mfg-name-7", "model-7", "serial-7", "firmware-7",
-            "mfg-name-8", "model-8", "serial-8", "firmware-8",
-            "mfg-name-9", "model-9", "serial-9", "firmware-9",
-            "mfg-name-10", "model-10", "serial-10", "firmware-10"
+            "mfg-name-1", "model-1", "serial-1", "component-1",
+            "mfg-name-2", "model-2", "serial-2", "component-2",
+            "mfg-name-3", "model-3", "serial-3", "component-3",
+            "mfg-name-4", "model-4", "serial-4", "component-4",
+            "mfg-name-5", "model-5", "serial-5", "component-5",
+            "mfg-name-6", "model-6", "serial-6", "component-6",
+            "mfg-name-7", "model-7", "serial-7", "component-7",
+            "mfg-name-8", "model-8", "serial-8", "component-8",
+            "mfg-name-9", "model-9", "serial-9", "component-9",
+            "mfg-name-10", "model-10", "serial-10", "component-10"
             // ... repeat for the remaining input IDs
         ];
 

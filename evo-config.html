@@ -272,8 +272,8 @@
         printWindow.document.write('<div class="spacer"></div>');
 
         // Table for the grid
-        printWindow.document.write('<table class="print-table">');
-        printWindow.document.write('<thead><tr><th>Mfg. Name</th><th>Model</th><th>Serial</th><th>Component</th></tr></thead><tbody>');
+        printWindow.document.write('<table class="print-table", style="width: 100%;">');
+        printWindow.document.write('<thead><tr><th width="10%">Mfg. Name</th><th width="30%">Model</th><th width="30%">Serial</th><th width="30%">Component</th></tr></thead><tbody>');
 
         gridValues.forEach(rowData => {
                 printWindow.document.write('<tr>');

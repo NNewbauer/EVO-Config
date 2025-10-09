@@ -125,6 +125,9 @@
 <body>
     <div class="container">
         <div style="text-align: center;">
+            <div style="text-align: left;">
+                <h4>Version 2.4</h4>
+            </div>
             <img src="https://www.studionetworksolutions.com/wp-content/uploads/2023/09/EVO-Cloud.png" alt="SNS Logo" style="height: 100px; margin-top: 25px; margin-bottom: 0px; margin-left: 10px;">
             <h1>SNS Assembly EVO Hardware Config Sheet</h1>
         </div>
@@ -266,6 +269,7 @@
         // Table for the top input boxes
         printWindow.document.write('<table class="print-table">');
 		printWindow.document.write('<table>');
+        printWindow.document.write('<img src="https://www.studionetworksolutions.com/wp-content/uploads/2023/09/EVO-Cloud.png" alt="SNS Logo" style="height: 75px; margin-top: 25px; margin-bottom: 0px; margin-left: 10px;">');
         printWindow.document.write('<thead><tr><th style="padding-inline: 40px;">Sales Order #</th><br><th style="padding-inline: 40px;">EVO Serial #</th><th style="padding-inline: 40px;">MBX # (Other - Scan Chassis)</th></tr></thead><tbody>');
         printWindow.document.write(`<tr><td class="barcode" style="padding-inline: 40px;">*${inputValues.input1}*</td><td class="barcode" style="padding-inline: 40px;">*${inputValues.input2}*</td><td class="barcode" style="padding-inline: 40px;">*${inputValues.input3}*</td></tr>`);
         printWindow.document.write('</tbody></table>');

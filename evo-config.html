@@ -266,13 +266,13 @@
         // Table for the top input boxes
         printWindow.document.write('<table class="print-table">');
 		printWindow.document.write('<table>');
-        printWindow.document.write('<thead><tr><th>Sales Order #</th><br><th>EVO Serial #</th><th>MBX # (Other - Scan Chassis)</th></tr></thead><tbody>');
-        printWindow.document.write(`<tr><td class="barcode">*${inputValues.input1}*</td><td class="barcode">*${inputValues.input2}*</td><td class="barcode">*${inputValues.input3}*</td></tr>`);
+        printWindow.document.write('<thead><tr><th style="padding: 40px;">Sales Order #</th><br><th style="padding: 40px;">EVO Serial #</th><th style="padding: 40px;">MBX # (Other - Scan Chassis)</th></tr></thead><tbody>');
+        printWindow.document.write(`<tr><td class="barcode" style="padding: 40px;">*${inputValues.input1}*</td><td class="barcode" style="padding: 40px;">*${inputValues.input2}*</td><td class="barcode" style="padding: 40px;">*${inputValues.input3}*</td></tr>`);
         printWindow.document.write('</tbody></table>');
         printWindow.document.write('<div class="spacer"></div>');
 
         // Table for the grid
-        printWindow.document.write('<table class="print-table", style="width: 100%;">');
+        printWindow.document.write('<table class="print-table", style="width: 150%;">');
         printWindow.document.write('<thead><tr><th width="10%">Mfg. Name</th><th width="30%">Model</th><th width="30%">Serial</th><th width="30%">Component</th></tr></thead><tbody>');
 
         gridValues.forEach(rowData => {
